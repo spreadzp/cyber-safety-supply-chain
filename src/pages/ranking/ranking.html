@@ -1,0 +1,110 @@
+<ion-header no-border class="main-header">
+    <ion-row no-padding class="header-row">
+        <ion-col no-padding align-self-center col-4>
+            <ion-row>
+                <span class="text-main">{{ "app.ranking" | translate }}</span>
+                <select [(ngModel)]="comboSelected" (ngModelChange)="setSeason($event)" class="dropdown dropdown--ranking">
+                    <option hidden value="" disabled selected>{{ "ranking.selectSeason" | translate }}</option>
+                    <option *ngFor="let option of seasons" [ngValue]="option">
+                        {{ option }}
+                    </option>
+                </select>
+            </ion-row>
+        </ion-col>
+        <ion-col col-4 no-padding class="text-ranking">
+            <div class="ranking-top">
+                <ion-row>
+                    <ion-col col-7>{{ "ranking.current" | translate }} {{ "ranking.season" | translate }}: {{ numberOfSeasons }}</ion-col>
+                    <ion-col col-5 *ngIf="days > 0" class="ranking-left">{{ days }} {{ "ranking.day" | translate }} {{ "ranking.left" | translate }}</ion-col>
+                    <ion-col col-5 *ngIf="days <= 0" class="ranking-left">{{ hours }} {{ "ranking.hours" | translate }}, {{ minutes }} {{ "ranking.minutes" | translate }}  {{ "ranking.left" | translate }} </ion-col>
+                </ion-row>
+            </div>
+        </ion-col>
+    </ion-row>
+</ion-header>
+
+
+<ion-content center padding class="main-container">
+    <ion-row>
+        <ion-col>
+            <ion-row no-padding>
+                <ion-col col-10 no-padding>
+                    <span *ngIf="globalSelected; else globalNotSelectedBlock"> {{ "ranking.global" | translate }}</span>
+                    <ng-template #globalNotSelectedBlock>{{ "app.ranking" | translate }} · {{ "ranking.season" | translate }} {{ seasonSelected }}</ng-template>
+                    <span class="text-details ranking-a"><a no-padding (click)="setCurrentSeason()"> | {{ "ranking.retrieveToSeason" | translate }}</a></span>
+                </ion-col>
+                <ion-col col-2 no-padding class="ranking-left">
+                    <a class="text-details ranking-a" no-padding (click)="goBackToUser()">{{ "ranking.retrieve" | translate }}</a>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <table class="table">
+                    <tr *ngFor="let user of usersRep" ranking-card [ngClass]="{'card-user':user.userHash === userHash}" (click)="setUser(user.userHash)" [globalSelection]="globalSelected" [ranking]="user"></tr>
+                </table>
+            </ion-row>
+        </ion-col>
+        <ion-col>
+            <ion-row no-padding>
+                <span class="text-details text-details--bold">{{ "ranking.details" | translate }}:</span>
+            </ion-row>
+            <ion-row padding class="profile-details-container">
+                <ion-col col-auto justify-content-center>
+                    <img class="box-avatar box-avatar__big" src="http://identicon.org?t={{ userRankDetails.name }}">
+                </ion-col>
+                <ion-col col-3 padding justify-content-center center class="vert-separator">
+                    <ion-row class="text-title">
+                        {{ userRankDetails.name }}
+                    </ion-row>
+                    <ion-row class="text-description text-ellipsis">
+                        {{ userRankDetails.email }}
+                    </ion-row>
+                </ion-col>
+                <ion-col class="vert-separator">
+                    <ion-row justify-content-center>
+                        <ion-col no-padding>
+                            <ion-row justify-content-center class="text-title ranking-details">{{ "app.reviews" | translate }}</ion-row>
+                            <ion-row justify-content-center class="text-title">{{ userRankDetails.reviews }}</ion-row>
+                        </ion-col>
+                        <ion-col no-padding>
+                            <ion-row justify-content-center class="text-title ranking-details">{{ "app.commits" | translate }}</ion-row>
+                            <ion-row justify-content-center class="text-title">{{ userRankDetails.commits }}</ion-row>
+                        </ion-col>
+                        <ion-col no-padding>
+                            <ion-row justify-content-center class="text-title ranking-details">{{ "ranking.agreed" | translate }}</ion-row>
+                            <ion-row justify-content-center class="text-title"> {{ userRankDetails.agreed }}%</ion-row>
+                        </ion-col>
+                    </ion-row>
+                </ion-col>
+                <ion-col col-3 no-padding>
+                    <ion-row *ngIf="globalSelected; else globalNotSelectedBlockTwo">
+                        <ion-col class="text-title">
+                            <ion-row justify-content-center class="ranking-details no-wrap">{{ "ranking.engagementIndex" | translate }}</ion-row>
+                            <ion-row justify-content-center>
+                                <img src="../../assets/imgs/chains.svg">
+                                <span class="ranking-score">{{ userRankDetails.engagementIndexString }}</span>
+                            </ion-row>
+                        </ion-col>
+                    </ion-row>
+                    <ng-template #globalNotSelectedBlockTwo>
+                        <ion-row justify-content-center padding>
+                            <ion-col no-padding class="no-wrap">
+                                    <span class="ranking-details--star">{{ userRankDetails.scoreString }} </span>
+                                    <img class="btn--img" src="../../assets/imgs/star-icon.svg">
+                            </ion-col> 
+                        </ion-row>
+                    </ng-template>
+                </ion-col>
+            </ion-row>
+            <ion-row padding></ion-row>
+            <ion-row *ngIf="globalSelected && isPageLoaded" padding class="achievement-box-style">
+                <ion-col class="box-height">
+                    <ion-row *ngFor="let rowIndex of [0,1,2,3]" padding>
+                        <ion-col *ngFor="let i of [(rowIndex*4),(rowIndex*4)+1,(rowIndex*4)+2,(rowIndex*4)+3]">
+                            <achievement [isEmpty]="achievementsUnlocked[i].isEmpty" [achievementInfo]="achievementsUnlocked[i]" ></achievement>
+                        </ion-col>
+                    </ion-row>
+                </ion-col>
+            </ion-row>
+        </ion-col>
+    </ion-row>
+</ion-content>

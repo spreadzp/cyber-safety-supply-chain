@@ -1,0 +1,35 @@
+<td>
+    <ion-row padding class="text-details text-details--bold"> {{ userPosition }} </ion-row>
+</td>
+<td>
+    <ion-row justify-content-center>
+        <img class="box-avatar" src="http://identicon.org?t={{ name }}">
+    </ion-row>
+</td>
+<td>
+    <ion-row class="text-title"> {{ name }} </ion-row>
+    <ion-row class="text-description no-wrap"> {{ email }} </ion-row>
+</td>
+<td>
+    <ion-row *ngIf="globalSelected; else elseBlock">
+        <img class="ico ico__big" src="../../assets/imgs/chains.svg">
+        <span class="text-title ranking-score">{{ engagementIndexString }}</span>
+    </ion-row>
+    <ng-template #elseBlock>
+        <span class="text-title text-title--yellow ranking-score"> {{ reputationString }} </span>
+        <img class="ico ico__big" src="../../assets/imgs/star-icon.svg">
+    </ng-template>
+
+</td>
+<td>
+    <ion-row justify-content-center class="text-title">{{ numReviews }}</ion-row>
+    <ion-row justify-content-center class="text-description">{{ "app.reviews" | translate }}</ion-row>
+</td>
+<td>
+    <ion-row justify-content-center class="text-title">{{ numCommits }}</ion-row>
+    <ion-row justify-content-center class="text-description">{{ "app.commits" | translate }}</ion-row>
+</td>
+<td>
+    <ion-row justify-content-center class="text-title">{{ agreed }}%</ion-row>
+    <ion-row justify-content-center class="text-description">{{ "ranking.agreed" | translate }}</ion-row>
+</td>

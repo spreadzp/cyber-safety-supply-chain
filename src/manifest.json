@@ -1,0 +1,13 @@
+{
+    "name": "SupplyCore",
+    "short_name": "BB_DAPP",
+    "start_url": "index.html",
+    "display": "standalone",
+    "icons": [{
+        "src": "https://helloblockstack.com/icon-192x192.png",
+        "sizes": "128x128",
+        "type": "image/png"
+      }],
+    "background_color": "#4e8ef7",
+    "theme_color": "#4e8ef7"
+}

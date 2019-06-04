@@ -1,0 +1,8 @@
+{
+  "name": "SupplyCore",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  },
+  "app_id": ""
+}

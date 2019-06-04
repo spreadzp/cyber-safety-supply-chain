@@ -1,0 +1,14 @@
+<ion-row  justify-content-center *ngIf="setStars; else divStars">
+    <div *ngFor="let id of iconIds">
+        <button class="icon-style" (click)="setReputation(id)">
+            <div class="rating-icon" [ngClass]="icons[id] + ' ' + (small ? 'icon-small ' : '') + (iconMargin ? 'custom-icon-margin ' : '') + iconColor"></div>
+        </button>
+    </div>
+</ion-row>
+<ng-template #divStars>
+    <ion-row  justify-content-center>
+        <div *ngFor="let id of iconIds">
+            <div class="rating-icon" [ngClass]="icons[id] + ' ' + (small ? 'icon-small ' : '') + (iconMargin ? 'custom-icon-margin ' : '') + iconColor"></div>
+        </div>
+    </ion-row>
+</ng-template>

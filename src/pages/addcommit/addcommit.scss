@@ -1,0 +1,64 @@
+popover-addcommit {
+    .error-message {
+        color: red;
+    }
+    .dropdown {
+        //Size
+        width: 100%;
+        line-height: 40px;
+        //Font styling
+        padding-left: 15px;
+        font-size: 15px;
+        font-weight: 500;
+        color: rgba(0, 0, 0, 0.5);
+        //Shape styling
+        background-color: rgba(0, 0, 0, 0.05);
+        border-radius: 20px;
+        border: none;
+        //Remove default style
+        appearance: none;
+    }
+    .dropdown__arrow {
+        //Dropdown arrow
+        background-image: url("../../assets/imgs/down-arrow-icon-dep.svg");
+        background-size: 10px;
+        background-repeat: no-repeat;
+        background-position-x: calc(100% - 15px);
+        background-position-y: 50%;
+    }
+    .dropdown__search {
+        //Dropdown search
+        background-image: url("../../assets/imgs/search-icon.svg");
+        background-size: 15px;
+        background-repeat: no-repeat;
+        background-position-x: calc(100% - 20px);
+        background-position-y: 50%;
+    }
+    .list-card {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
+    .form-container {
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        border-radius: 0 0 5px 5px;
+    }
+    .form-container__form-top-rounded {
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+    }
+}
+
+ion-backdrop {
+    background-color: black;
+    opacity: 0.8;
+}
+
+.add-commit-popover .popover-content {
+    width: 50%;
+    height: calc(100% - 300px);
+    border-radius: 10px;
+    top: 150px !important;
+    left: 25% !important;
+    .scroll-content {}
+}
